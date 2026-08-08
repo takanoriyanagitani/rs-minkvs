@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package minkvs.v1;
+
+option go_package = "github.com/takanoriyanagitani/rs-minkvs/v1";
+
+message GetRequest {
+  bytes key = 1;
+}
+
+message GetResponse {
+  bytes val = 1;
+}
+
+message SetRequest {
+  bytes key = 1;
+  bytes val = 2;
+}
+
+message SetResponse {
+  bool overwritten = 1;
+}
+
+message GetKeysRequest {
+  uint32 max_num_keys = 1;
+}
+
+message GetKeysResponse {
+  repeated bytes keys = 1;
+}
+
+message DelRequest {
+  bytes key = 1;
+}
+
+message DelResponse {
+  bool absent = 1;
+}
+
+message MultiGetRequest {
+  repeated bytes keys = 1;
+}
+
+message KeyValPair {
+  bytes key = 1;
+  bytes val = 2;
+  bool found = 3;
+}
+
+message MultiGetResponse {
+  repeated KeyValPair pairs = 1;
+}
+
+message SetPair {
+  bytes key = 1;
+  bytes val = 2;
+}
+
+message MultiSetRequest {
+  repeated SetPair pairs = 1;
+}
+
+message MultiSetResponse {
+  // Returns the number of keys that were actually overwritten
+  uint32 overwritten_count = 1;
+}
+
+message ExistsRequest {
+  bytes key = 1;
+}
+
+message ExistsResponse {
+  bool exists = 1;
+}
+
+message CountRequest {}
+
+message CountResponse {
+  uint64 count = 1;
+}
+
+service MinKvsService {
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc GetKeys(GetKeysRequest) returns (GetKeysResponse);
+  rpc MultiGet(MultiGetRequest) returns (MultiGetResponse);
+
+  rpc Exists(ExistsRequest) returns (ExistsResponse);
+  rpc Count(CountRequest) returns (CountResponse);
+
+  rpc Set(SetRequest) returns (SetResponse);
+  rpc Del(DelRequest) returns (DelResponse);
+  rpc MultiSet(MultiSetRequest) returns (MultiSetResponse);
+}

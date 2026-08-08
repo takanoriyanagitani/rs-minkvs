@@ -1,0 +1,66 @@
+[package]
+name = "rs-minkvs"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "minkvs_bt"
+
+[dependencies.tokio]
+version = "1"
+default-features = false
+features = [
+	"macros",
+	"rt-multi-thread",
+	"time",
+]
+
+[dependencies.tonic]
+version = "0.14"
+default-features = false
+features = [
+	"transport",
+	"codegen",
+	"router",
+]
+
+[dependencies.prost]
+version = "0.14"
+default-features = false
+features = [
+	"std",
+	"derive",
+]
+
+[dependencies.tonic-prost]
+version = "0.14"
+default-features = false
+features = [
+]
+
+[dependencies.tonic-reflection]
+version = "0.14"
+default-features = false
+features = [
+  "server",
+]
+
+[build-dependencies.tonic-prost-build]
+version = "0.14"
+default-features = false
+features = [
+  "cleanup-markdown",
+	"transport",
+]
+
+[features]
+default = [
+  "basic-btree",
+]
+
+basic = [
+]
+
+basic-btree = [
+  "basic",
+]
