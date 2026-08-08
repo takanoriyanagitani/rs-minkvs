@@ -3,6 +3,13 @@ name = "rs-minkvs"
 version = "0.1.0"
 edition = "2024"
 
+description = "Very simple in-memory key/val store using grpc."
+license = "Apache-2.0"
+repository = "https://github.com/takanoriyanagitani/rs-minkvs"
+homepage = "https://github.com/takanoriyanagitani/rs-minkvs"
+documentation = "https://docs.rs/rs-minkvs/latest"
+keywords = ["grpc", "kvs", "kvstore"]
+
 [[bin]]
 name = "minkvs_bt"
 
